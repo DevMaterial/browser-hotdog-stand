@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+500');
+
+:root {
+  --white: #f4f4f1;
+  --red: #d86262;
+  --blue: #7ab0d0;
+  --black: #0d0e0e;
+}
+
+body {
+  background: var(--white);
+  display: flex;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* input[type="radio"] { */
+/*   width: 16px; */
+/*   height: 16px; */
+/*   border-radius: 100%; */
+/*   background: var(--white); */
+/*   border: 1px solid #e0e0e0; */
+/*   margin: 0 3px; */
+/* } */
+
+/* input[type="radio"]:checked + span{ */
+/*   height: 8px; */
+/*   width: 8px; */
+/*   border-radius: 100%; */
+/*   background-color: var(--black); */
+/*   top: 3px; */
+/*   left: 3px; */
+/*   /\* transition: background 0.2s linear; *\/ */
+/* } */
+
+h1, h2 {
+  font-weight: bold;
+  color: var(--black);
+  font-family: inherit;
+}
+
+#hotdogMaker {
+}
+
+.hotdog {}
+
+.bun {}
+
+.condiments {}
+
+input[type='submit'] {
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+    height: 38px;
+    padding: 0 20px;
+    margin-top: 30px;
+    transition: all 0.2s;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--white);
+}
+
+input[type='submit']:hover {
+    background-color: var(--red);
+    border-color: var(--red);
+}
+
+#preview {
+    width: 400px;
+    height: 200px;
+    margin: 100px 0 0 20px;
+}
+
+.order {
+    border: 5px solid var(--black);
+    padding: 0 30px 15px 30px;
+}
+
+#preview ul {}
+
+#preview ul li {}
+
+#result {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+

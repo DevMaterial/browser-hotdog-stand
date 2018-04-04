@@ -9,24 +9,26 @@
     <title>Hotdog stand</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <form id="hotdogMaker" action="">
+      <form id="hotdogMaker" action="" autocomplete="off">
+      <h1>HOTDOG STAND</h1>
       <div class="hotdog">
-        Hotdog </br>
+        <h2>Meat</h2>
         <input type="radio" name="hotdog" value="regular">Regular </br>
         <input type="radio" name="hotdog" value="sasauge">Sasauge
       </div>
       <div class="bun">
-        Bun </br>
+        <h2>Bun</h2>
         <input type="radio" name="bun" value="regular">Regular </br>
         <input type="radio" name="bun" value="sourdough">Sourdough
       </div>
       <div class="condiments">
-        Condiments </br>
+        <h2>Condiments</h2>
         <input type="checkbox" name="condiments" value="ketchup">Ketchup </br>
         <input type="checkbox" name="condiments" value="mustard">Mustard </br>
         <input type="checkbox" name="condiments" value="relish">Relish </br>
@@ -35,13 +37,16 @@
       <input type="submit" value="submit">
     </form>
     <div id="preview">
-      <ul>
-        <li name="hotdog"></li>
-        <li name="bun"></li>
-        <li name="condiments"></li>
-      </ul>
+      <div class="order">
+        <h2>Preview</h2>
+        <ul>
+          <li name="hotdog"></li>
+          <li name="bun"></li>
+          <li name="condiments"></li>
+        </ul>
+      </div>
+      <div id="result"></div>
     </div>
-    <div id="result"></div>
     <script src="script.js"></script>
   </body>
 </html>

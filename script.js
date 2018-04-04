@@ -1,56 +1,40 @@
 let dogMaker = document.forms.hotdogMaker;
 let result = document.getElementById('result');
+let ingredients = [...dogMaker.querySelectorAll('input:checked')];
 
-dogMaker.addEventListener('change', () => {
-  let ingredients = [...dogMaker.querySelectorAll('input:checked')];
-
-  class Hotdog {
-    constructor() {
-      this.hotdog = ingredients[0];
-      this.bun = ingredients[1];
-      this.condiments = ingredients.slice(2);
-    }
-
-    bind(option) {
-      let i = this[option];
-      document.querySelector(`#preview > ul > [name="${i.name}"]`).innerHTML = this[option].map(c => c.value);
-    }
-
-    test() {
-      console.log([this.hotdog, this.bun, this.condiments]);
-      result.innerHTML = `Your order of a ${this.hotdog} hotdog with a ${this.bun} bun topped off with ${this.condiments} is coming up`; 
-    }
+class Hotdog {
+  constructor(ingredients) {
+    this.hotdog = ingredients[0];
+    this.bun = ingredients[1];
+    this.condiments = ingredients.slice(2);
   }
 
-  document.querySelector('#preview > ul > [name="hotdog"]').innerHTML = ingredients[0].name;
-  document.querySelector('#preview > ul > [name="bun"]').innerHTML = ingredients[1].name;
-  document.querySelector('#preview > ul > [name="condiments"]').innerHTML = ingredients.slice(2).map(c => c.value);
+  bind() {
+    // let i = this[option];
+    // document.querySelector(`#preview > ul > [name="${i.name}"]`).innerHTML = this[option].map(c => c.value);
+    document.querySelector('#preview > .order > ul > [name="hotdog"]').innerHTML = ingredients[0].value;
+    document.querySelector('#preview > .order > ul > [name="bun"]').innerHTML = ingredients[1].value;
+    document.querySelector('#preview > .order > ul > [name="condiments"]').innerHTML = ingredients.slice(2).map(c => c.value).join(', ');
+  }
 
-  let testing = new Hotdog();
-  // testing.bind('condiments');
-  // testing.test();
-})
+  orderResult() {
+    result.innerHTML = `Your order of a ${this.hotdog.value} hotdog on a ${this.bun.value} bun topped off with ${this.condiments.map(c => c.value).join(', ')} is coming up!`;
+  }
 
-// dogMaker.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   let data = {
-//     hotdog: dogMaker.querySelector('input[name="hotdog"]:checked').value,
-//     bun: dogMaker.querySelector('input[name="bun"]:checked').value,
-//     condiments: [...document.querySelectorAll('input[name="condiments"]:checked')].map(c => c.value),
-//   }
+  initialize() {
+    this.bind();
+  }
+}
 
-//   class Hotdog {
-//     constructor() {
-//       this.hotdog = data.hotdog;
-//       this.bun = data.bun;
-//       this.condiments = data.condiments;
-//     }
+let newOrder = new Hotdog(ingredients);
 
-//     test() {
-//       console.log([this.hotdog, this.bun, this.condiments]);
-//       result.innerHTML = `Your order of a ${this.hotdog} hotdog with a ${this.bun} bun topped off with ${this.condiments} is coming up`; 
-//     }
-//   }
-//   let testing = new Hotdog();
-//   testing.test();
-// });
+dogMaker.addEventListener('change', () => {
+  ingredients = [...dogMaker.querySelectorAll('input:checked')];
+  newOrder.initialize();
+});
+
+dogMaker.addEventListener('submit', (e) => {
+  e.preventDefault();
+  newOrder = new Hotdog(ingredients);
+  newOrder.orderResult();
+});
