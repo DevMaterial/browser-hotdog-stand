@@ -89,7 +89,7 @@ eval("module.exports = {\"food\":{\"hotdog\":[{\"meat\":[{\"type\":\"select\"},\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("let data = __webpack_require__(/*! ./data.json */ \"./app/data.json\");\nlet { generateUserTemplate } = __webpack_require__(/*! ./user/render-menu */ \"./app/user/render-menu.js\");\nlet listeners = __webpack_require__(/*! ./user/event-listeners */ \"./app/user/event-listeners.js\");\nlet { el } = __webpack_require__(/*! ./user/elements */ \"./app/user/elements.js\");\n// let { updateIngredients } = require('./user/helpers');\n\nlet status = document.getElementById('toggleStatus');\nlet ingredients = [...el.select, ...el.hotdogMaker.querySelectorAll('input:checked')];\n\nlet hotdog = data.food.hotdog\n\nlet bind = () => {\n  // let i = this[option];\n  // document.querySelector(`#preview > ul > [name=\"${i.name}\"]`).innerHTML = this[option].map(c => c.value);\n  document.querySelector('#preview > .order > ul > [name=\"meat\"]').innerHTML = ingredients[0].value;\n  document.querySelector('#preview > .order > ul > [name=\"bun\"]').innerHTML = ingredients[1].value;\n  document.querySelector('#preview > .order > ul > [name=\"condiments\"]').innerHTML = ingredients.slice(2).map(c => c.value).join(', ');\n}\n\nlet orderResult = () => {\n  result.innerHTML = `Your order of a ${ingredients[0].value} hotdog on a ${ingredients[1].value} bun topped off with ${ingredients.slice(2).map(c => c.value).join(', ')} is coming up!`;\n}\n\nlet updateIngredients = () => {\n  ingredients = [...el.select, ...el.hotdogMaker.querySelectorAll('input:checked')];\n}\n\nel.hotdogMaker.addEventListener('change', () => {\n  updateIngredients();\n  bind();\n});\n\nel.hotdogMaker.addEventListener('submit', (e) => {\n  e.preventDefault();\n  orderResult();\n});\n\nlet userOrAdmin = () => {\n  if (el.switch.checked) {\n    status.innerHTML = '';\n  } else {\n    status.innerHTML = '';\n    generateUserTemplate();\n  }\n}\n\nel.switch.addEventListener('change', () => {\n  userOrAdmin();\n});\n\n//# sourceURL=webpack:///./app/script.js?");
+eval("let data = __webpack_require__(/*! ./data.json */ \"./app/data.json\");\nlet { generateUserTemplate } = __webpack_require__(/*! ./user/render-menu */ \"./app/user/render-menu.js\");\nlet { el } = __webpack_require__(/*! ./user/elements */ \"./app/user/elements.js\");\nlet listeners = __webpack_require__(/*! ./user/event-listeners */ \"./app/user/event-listeners.js\");\n\nconsole.log(listeners);\n\nlet ingredients = [...el.select, ...el.hotdogMaker.querySelectorAll('input:checked')];\n\n(initialize => {\n  listeners.hotdogMaker();\n  listeners.role();\n})();\n\n//# sourceURL=webpack:///./app/script.js?");
 
 /***/ }),
 
@@ -100,7 +100,7 @@ eval("let data = __webpack_require__(/*! ./data.json */ \"./app/data.json\");\nl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("const el = {\n  hotdogMaker: document.forms.hotdogMaker,\n  result: document.getElementById('result'),\n  select: hotdogMaker.querySelectorAll('select'),\n  switch: document.querySelector('.switch').querySelector(\"input[type=checkbox]\"),\n}\n\nmodule.exports = { el };\n\n//# sourceURL=webpack:///./app/user/elements.js?");
+eval("const el = {\n  hotdogMaker: document.forms.hotdogMaker,\n  result: document.getElementById('result'),\n  select: hotdogMaker.querySelectorAll('select'),\n  switch: document.querySelector('.switch').querySelector(\"input[type=checkbox]\"),\n  status: document.getElementById('toggleStatus'),\n}\n\nmodule.exports = { el };\n\n//# sourceURL=webpack:///./app/user/elements.js?");
 
 /***/ }),
 
@@ -111,7 +111,18 @@ eval("const el = {\n  hotdogMaker: document.forms.hotdogMaker,\n  result: docume
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("let { el } = __webpack_require__(/*! ./elements */ \"./app/user/elements.js\");\n\nlet event = () => {\n  el.hotdogMaker.addEventListener('change', () => {\n    updateIngredients();\n    newOrder = new Hotdog(ingredients)\n    newOrder.initialize();\n  });\n  \n  el.hotdogMaker.addEventListener('submit', (e) => {\n    e.preventDefault();\n    newOrder = new Hotdog(ingredients);\n    newOrder.orderResult();\n  });\n}\n\nmodule.exports = { event };\n\n//# sourceURL=webpack:///./app/user/event-listeners.js?");
+eval("let { el } = __webpack_require__(/*! ./elements */ \"./app/user/elements.js\");\nlet { helpers } = __webpack_require__(/*! ./helpers */ \"./app/user/helpers.js\");\n\nlet listeners = {\n  hotdogMaker: () => {\n    el.hotdogMaker.addEventListener('change', () => {\n      console.log('yeet');\n      helpers.updateIngredients();\n      helpers.bind();\n    });\n    \n    el.hotdogMaker.addEventListener('submit', (e) => {\n      e.preventDefault();\n      helpers.orderResult();\n    });\n  },\n\n  role: () => {\n    el.switch.addEventListener('change', () => {\n      helpers.permissions();\n    });\n  }\n}\n\nmodule.exports = listeners;\n\n//# sourceURL=webpack:///./app/user/event-listeners.js?");
+
+/***/ }),
+
+/***/ "./app/user/helpers.js":
+/*!*****************************!*\
+  !*** ./app/user/helpers.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("let { generateUserTemplate } = __webpack_require__(/*! ./render-menu */ \"./app/user/render-menu.js\");\nlet { el } = __webpack_require__(/*! ./elements */ \"./app/user/elements.js\");\nlet listeners = __webpack_require__(/*! ./event-listeners */ \"./app/user/event-listeners.js\");\n\nconsole.log(listeners);\n\nvar helpers = {\n  bind: () => {\n    // let i = this[option];\n    // document.querySelector(`#preview > ul > [name=\"${i.name}\"]`).innerHTML = this[option].map(c => c.value);\n    document.querySelector('#preview > .order > ul > [name=\"meat\"]').innerHTML = ingredients[0].value;\n    document.querySelector('#preview > .order > ul > [name=\"bun\"]').innerHTML = ingredients[1].value;\n    document.querySelector('#preview > .order > ul > [name=\"condiments\"]').innerHTML = ingredients.slice(2).map(c => c.value).join(', ');\n  },\n\n  updateIngredients: () => {\n    ingredients = [...el.select, ...el.hotdogMaker.querySelectorAll('input:checked')];\n  },\n  \n  orderResult: () => {\n    result.innerHTML = `Your order of a ${ingredients[0].value} \n                        hotdog on a ${ingredients[1].value} \n                        bun topped off with ${ingredients.slice(2).map(c => c.value).join(', ')} is coming up!`;\n  },\n\n  permissions: () => {\n    if (el.switch.checked) {\n      el.status.innerHTML = '';\n    } else {\n      el.status.innerHTML = '';\n      generateUserTemplate();\n      listeners.hotdogMaker();\n    }\n  }\n}\n\nmodule.exports = { helpers };\n\n//# sourceURL=webpack:///./app/user/helpers.js?");
 
 /***/ }),
 

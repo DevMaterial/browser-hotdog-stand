@@ -1,17 +1,25 @@
 let { el } = require('./elements');
+let { helpers } = require('./helpers');
 
-let event = () => {
-  el.hotdogMaker.addEventListener('change', () => {
-    updateIngredients();
-    newOrder = new Hotdog(ingredients)
-    newOrder.initialize();
-  });
-  
-  el.hotdogMaker.addEventListener('submit', (e) => {
-    e.preventDefault();
-    newOrder = new Hotdog(ingredients);
-    newOrder.orderResult();
-  });
+let listeners = {
+  hotdogMaker: () => {
+    el.hotdogMaker.addEventListener('change', () => {
+      console.log('yeet');
+      helpers.updateIngredients();
+      helpers.bind();
+    });
+    
+    el.hotdogMaker.addEventListener('submit', (e) => {
+      e.preventDefault();
+      helpers.orderResult();
+    });
+  },
+
+  role: () => {
+    el.switch.addEventListener('change', () => {
+      helpers.permissions();
+    });
+  }
 }
 
-module.exports = { event };
+module.exports = listeners;
