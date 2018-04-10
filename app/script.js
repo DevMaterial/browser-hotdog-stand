@@ -1,8 +1,6 @@
 let data = require('./data.json');
-// let menu = require('./user/render-menu');
 let { generateUserTemplate } = require('./user/render-menu');
 let listeners = require('./user/event-listeners');
-
 let { el } = require('./user/elements');
 // let { updateIngredients } = require('./user/helpers');
 
@@ -11,46 +9,30 @@ let ingredients = [...el.select, ...el.hotdogMaker.querySelectorAll('input:check
 
 let hotdog = data.food.hotdog
 
-class Hotdog {
-  constructor(ingredients) {
-    this.hotdog = ingredients[0];
-    this.bun = ingredients[1];
-    this.condiments = ingredients.slice(2);
-  }
+let bind = () => {
+  // let i = this[option];
+  // document.querySelector(`#preview > ul > [name="${i.name}"]`).innerHTML = this[option].map(c => c.value);
+  document.querySelector('#preview > .order > ul > [name="meat"]').innerHTML = ingredients[0].value;
+  document.querySelector('#preview > .order > ul > [name="bun"]').innerHTML = ingredients[1].value;
+  document.querySelector('#preview > .order > ul > [name="condiments"]').innerHTML = ingredients.slice(2).map(c => c.value).join(', ');
+}
 
-  bind() {
-    // let i = this[option];
-    // document.querySelector(`#preview > ul > [name="${i.name}"]`).innerHTML = this[option].map(c => c.value);
-    document.querySelector('#preview > .order > ul > [name="meat"]').innerHTML = this.hotdog.value;
-    document.querySelector('#preview > .order > ul > [name="bun"]').innerHTML = this.bun.value;
-    document.querySelector('#preview > .order > ul > [name="condiments"]').innerHTML = this.condiments.map(c => c.value).join(', ');
-  }
-
-  orderResult() {
-    result.innerHTML = `Your order of a ${this.hotdog.value} hotdog on a ${this.bun.value} bun topped off with ${this.condiments.map(c => c.value).join(', ')} is coming up!`;
-  }
-
-  initialize() {
-    this.bind();
-  }
+let orderResult = () => {
+  result.innerHTML = `Your order of a ${ingredients[0].value} hotdog on a ${ingredients[1].value} bun topped off with ${ingredients.slice(2).map(c => c.value).join(', ')} is coming up!`;
 }
 
 let updateIngredients = () => {
   ingredients = [...el.select, ...el.hotdogMaker.querySelectorAll('input:checked')];
 }
 
-let newOrder;
-
 el.hotdogMaker.addEventListener('change', () => {
   updateIngredients();
-  newOrder = new Hotdog(ingredients)
-  newOrder.initialize();
+  bind();
 });
 
 el.hotdogMaker.addEventListener('submit', (e) => {
   e.preventDefault();
-  newOrder = new Hotdog(ingredients);
-  newOrder.orderResult();
+  orderResult();
 });
 
 let userOrAdmin = () => {

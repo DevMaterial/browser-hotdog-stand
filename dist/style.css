@@ -214,3 +214,14 @@ input[type='submit']:hover {
     border-radius: 50%;
   } 
 
+  select {
+    background-color: var(--white);
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid var(--grey-2);
+    border-radius: 2px;
+    font-family: Helvetica;
+    font-size: 13px;
+    color: var(--black);;
+  }
+
