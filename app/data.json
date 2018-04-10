@@ -1,0 +1,36 @@
+{
+  "food": {
+    "hotdog": [
+      {
+        "meat": [
+          {
+            "type": "select"
+          },
+          "beef",
+          "sausage"
+        ]
+      },
+      {
+        "bun": [
+          {
+            "type": "select"
+          },
+          "regular",
+          "sourdough",
+          "gluten-free"
+        ]
+      },
+      {
+        "condiments": [
+          {
+            "type": "checkbox"
+          },
+          "ketchup",
+          "mustard",
+          "relish",
+          "onions"
+        ]
+      }
+    ]
+  }
+}
