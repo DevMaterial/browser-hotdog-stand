@@ -1,13 +1,12 @@
-let data = require('./data.json');
-let { generateUserTemplate } = require('./user/render-menu');
-let { el } = require('./user/elements');
-let listeners = require('./user/event-listeners');
-
-console.log(listeners);
+const data = require('./data.json');
+const { generateUserTemplate } = require('./user/render-menu');
+const { el } = require('./user/elements');
+const { listeners } = require('./user/event-listeners');
+const { checkSwitch, role } = require('./user/permissions');
 
 let ingredients = [...el.select, ...el.hotdogMaker.querySelectorAll('input:checked')];
 
 (initialize => {
   listeners.hotdogMaker();
-  listeners.role();
+  role();
 })();

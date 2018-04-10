@@ -1,10 +1,10 @@
-let { el } = require('./elements');
-let { helpers } = require('./helpers');
+const { el } = require('./elements');
+const { helpers } = require('./helpers');
 
-let listeners = {
+const listeners = {
+
   hotdogMaker: () => {
     el.hotdogMaker.addEventListener('change', () => {
-      console.log('yeet');
       helpers.updateIngredients();
       helpers.bind();
     });
@@ -14,12 +14,6 @@ let listeners = {
       helpers.orderResult();
     });
   },
-
-  role: () => {
-    el.switch.addEventListener('change', () => {
-      helpers.permissions();
-    });
-  }
 }
 
-module.exports = listeners;
+module.exports = { listeners };

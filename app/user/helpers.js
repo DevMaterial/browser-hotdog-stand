@@ -1,10 +1,7 @@
-let { generateUserTemplate } = require('./render-menu');
-let { el } = require('./elements');
-let listeners = require('./event-listeners');
+const { generateUserTemplate } = require('./render-menu');
+const { el } = require('./elements');
 
-console.log(listeners);
-
-var helpers = {
+let helpers = {
   bind: () => {
     // let i = this[option];
     // document.querySelector(`#preview > ul > [name="${i.name}"]`).innerHTML = this[option].map(c => c.value);
@@ -22,16 +19,6 @@ var helpers = {
                         hotdog on a ${ingredients[1].value} 
                         bun topped off with ${ingredients.slice(2).map(c => c.value).join(', ')} is coming up!`;
   },
-
-  permissions: () => {
-    if (el.switch.checked) {
-      el.status.innerHTML = '';
-    } else {
-      el.status.innerHTML = '';
-      generateUserTemplate();
-      listeners.hotdogMaker();
-    }
-  }
 }
 
 module.exports = { helpers };
