@@ -4,11 +4,11 @@ const { listeners } = require('./event-listeners');
 
 const checkSwitch = () => {
   if (el.switch.checked) {
-    el.status.innerHTML = '';
+    el.user.style.display = "none";
+    el.admin.style.display = "flex";
   } else {
-    el.status.innerHTML = '';
-    generateUserTemplate();
-    listeners.hotdogMaker();
+    el.admin.style.display = "none";
+    el.user.style.display = "flex";
   }
 }
 

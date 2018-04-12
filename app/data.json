@@ -2,34 +2,33 @@
   "food": {
     "hotdog": [
       {
-        "meat": [
-          {
-            "type": "select"
-          },
-          "beef",
-          "sausage"
-        ]
+        "meat": {
+          "options": [
+            { "name": "beef" }, 
+            { "name": "sausage" }
+          ],
+          "type": "select"
+        }
       },
       {
-        "bun": [
-          {
-            "type": "select"
-          },
-          "regular",
-          "sourdough",
-          "gluten-free"
-        ]
+        "bun": {
+          "options": [
+            { "name": "white" },
+            { "name": "wheat" },
+            { "name": "sourdough" }
+          ],
+          "type": "select"
+        }
       },
       {
-        "condiments": [
-          {
-            "type": "checkbox"
-          },
-          "ketchup",
-          "mustard",
-          "relish",
-          "onions"
-        ]
+        "condiments": {
+          "options": [ 
+            { "name": "ketchup" },
+            { "name": "mustard" },
+            { "name": "relish" }
+          ],
+          "type": "checkbox"
+        }
       }
     ]
   }
